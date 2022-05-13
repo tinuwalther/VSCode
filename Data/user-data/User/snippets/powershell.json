@@ -31,7 +31,7 @@
 			"\tbegin{",
 			"\t\t$$StartTime = Get-Date",
 			"\t\t$$function = $($$MyInvocation.MyCommand.Name)",
-			"\t\tWrite-Verbose $('[', (Get-Date -f 'yyyy-MM-dd HH:mm:ss.fff'), ']', '[ Begin   ]', $$function  -Join ' ')",
+			"\t\tWrite-Verbose $('[', (Get-Date -f 'yyyy-MM-dd HH:mm:ss.fff'), ']', '[ Begin   ]', $$function -Join ' ')",
 			"\t}",
 			"",
 			"\tprocess{",
