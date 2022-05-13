@@ -1,18 +1,7 @@
 {
-	// Place your snippets for powershell here. Each snippet is defined under a snippet name and has a prefix, body and 
-	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
-	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
-	// same ids are connected.
-	// Example:
-	// "Print to console": {
-	// 	"prefix": "log",
-	// 	"body": [
-	// 		"console.log('$1');",
-	// 		"$2"
-	// 	],
-	// 	"description": "Log output to console"
-	// }
-
+	// Place your snippets for powershell here. Each snippet is defined under a snippet name and has a prefix, body and description. 
+	// The prefix is what is used to trigger the snippet and the body will be expanded and inserted.
+	
 	"New-MwaFunction": {
 		"prefix": ["New-MwaFunction"],
 		"body": [
@@ -38,6 +27,7 @@
 			"\t\tWrite-Verbose $('[', (Get-Date -f 'yyyy-MM-dd HH:mm:ss.fff'), ']', '[ Process ]', $$function -Join ' ')",
 			"\t\ttry{",
 			"\t\t\t$$ret = [PSCustomObject]$$InputObject",
+			"\t\t\tthrow 'There is something wrong in paradise'",
 			"\t\t}catch{",
 			"\t\t\tWrite-Warning $('ScriptName:', $($$_.InvocationInfo.ScriptName), 'LineNumber:', $($$_.InvocationInfo.ScriptLineNumber), 'Message:', $($$_.Exception.Message) -Join ' ')",
 			"\t\t\t$$Error.Clear()",
@@ -46,10 +36,17 @@
 			"",
 			"\tend{",
 			"\t\tWrite-Verbose $('[', (Get-Date -f 'yyyy-MM-dd HH:mm:ss.fff'), ']', '[ End     ]', $$function -Join ' ')",
+			"\t\t$$TimeSpan  = New-TimeSpan -Start $$StartTime -End (Get-Date)",
+			"\t\t$$Formatted = $$TimeSpan | ForEach-Object {",
+			"\t\t\t'{1:0}h {2:0}m {3:0}s {4:000}ms' -f $$_.Days, $$_.Hours, $$_.Minutes, $$_.Seconds, $$_.Milliseconds",
+			"\t\t}",
+			"\t\tWrite-Verbose $('Finished in:', $$Formatted -Join ' ')",
 			"\t\treturn $$ret",
 			"\t}",
-			"}"
+			"}",
+			"",
+			"New-MwaFunction -InputObject @{Firstname='Martin';Name='Walther'} -Verbose"
 		],
-		"description": "An advanced function"
+		"description": "An advanced function with begin, process, end, and an Error-Handling"
 	}
 }
