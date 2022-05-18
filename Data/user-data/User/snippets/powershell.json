@@ -1,7 +1,7 @@
 {
-	// Place your snippets for powershell here. Each snippet is defined under a snippet name and has a prefix, body and description. 
-	// The prefix is what is used to trigger the snippet and the body will be expanded and inserted.
-	
+	// Place your snippets for powershell here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted.
+
 	"New-MwaFunction": {
 		"prefix": ["New-MwaFunction"],
 		"body": [
@@ -20,20 +20,25 @@
 			"#>",
 			"function New-MwaFunction {",
 			"\t[CmdletBinding()]",
-			"\t\tparam(",
-			"\t\t\t[Parameter(",
-			"\t\t\t\tMandatory=$$true,",
-			"\t\t\t\tValueFromPipeline=$$true,",
-			"\t\t\t\tValueFromPipelineByPropertyName=$$true,",
-			"\t\t\t\tPosition = 0",
-			"\t\t\t)]",
+			"\tparam(",
+			"\t\t#region parameter, to add a new parameter, copy and paste the Parameter-region",
+			"\t\t[Parameter(",
+			"\t\t\tMandatory=$$true,",
+			"\t\t\tValueFromPipeline=$$true,",
+			"\t\t\tValueFromPipelineByPropertyName=$$true,",
+			"\t\t\tPosition = 0",
+			"\t\t)]",
 			"\t\t[Object] $$InputObject",
+			"\t\t#endregion",
 			"\t)",
 			"",
 			"\tbegin{",
+			"\t\t#region Do not change this region",
 			"\t\t$$StartTime = Get-Date",
 			"\t\t$$function = $($$MyInvocation.MyCommand.Name)",
 			"\t\tWrite-Verbose $('[', (Get-Date -f 'yyyy-MM-dd HH:mm:ss.fff'), ']', '[ Begin   ]', $$function -Join ' ')",
+			"\t\t#endregion",
+			"\t\t$$ret = $$null # or @()",
 			"\t}",
 			"",
 			"\tprocess{",
@@ -48,18 +53,21 @@
 			"\t}",
 			"",
 			"\tend{",
+			"\t\t#region Do not change this region",
 			"\t\tWrite-Verbose $('[', (Get-Date -f 'yyyy-MM-dd HH:mm:ss.fff'), ']', '[ End     ]', $$function -Join ' ')",
 			"\t\t$$TimeSpan  = New-TimeSpan -Start $$StartTime -End (Get-Date)",
 			"\t\t$$Formatted = $$TimeSpan | ForEach-Object {",
 			"\t\t\t'{1:0}h {2:0}m {3:0}s {4:000}ms' -f $$_.Days, $$_.Hours, $$_.Minutes, $$_.Seconds, $$_.Milliseconds",
 			"\t\t}",
 			"\t\tWrite-Verbose $('Finished in:', $$Formatted -Join ' ')",
+			"\t\t#endregion",
 			"\t\treturn $$ret",
 			"\t}",
 			"}",
 			"",
 			"New-MwaFunction -InputObject @{Firstname='Martin';Name='Walther'} -Verbose"
 		],
-		"description": "An advanced function with begin, process, end, and an Error-Handling"
+		"description": "An advanced function from tinuwalther"
 	}
+
 }
