@@ -19,7 +19,7 @@
 			"\tExplanation of the function or its result. You can include multiple examples with additional .EXAMPLE lines",
 			"#>",
 			"function New-MwaFunction {",
-			"\t[CmdletBinding()]",
+			"\t[CmdletBinding(SupportsShouldProcess=$True)]",
 			"\tparam(",
 			"\t\t#region parameter, to add a new parameter, copy and paste the Parameter-region",
 			"\t\t[Parameter(",
