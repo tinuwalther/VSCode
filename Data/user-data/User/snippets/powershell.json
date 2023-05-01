@@ -43,8 +43,8 @@
 			"",
 			"\tprocess{",
 			"\t\tWrite-Verbose $('[', (Get-Date -f 'yyyy-MM-dd HH:mm:ss.fff'), ']', '[ Process ]', $$function -Join ' ')",
-			"\t\tforeach($$item in $$PSBoundParameters.keys){ $$params = '$($$params) -$($$item) $($$PSBoundParameters[$$item])' }",
-			"\t\tif ($$PSCmdlet.ShouldProcess($$params)){",
+			"\t\tforeach($$item in $$PSBoundParameters.keys){ $$params = \u0022$($$params) -$($$item) $($$PSBoundParameters[$$item])\u0022 }",
+			"\t\tif ($$PSCmdlet.ShouldProcess($$params.Trim())){",
 			"\t\t\ttry{",
 			"\t\t\t\t$$ret = [PSCustomObject]$$InputObject",
 			"\t\t\t\tthrow 'There is something wrong in paradise'",
@@ -68,7 +68,7 @@
 			"\t}",
 			"}",
 			"",
-			"New-MwaFunction -InputObject @{Firstname='Martin';Name='Walther'} -Verbose"
+			"New-MwaFunction -InputObject @{Firstname='Martin';Name='Walther'} -Verbose -WhatIf"
 		],
 		"description": "An advanced function from tinuwalther"
 	}
