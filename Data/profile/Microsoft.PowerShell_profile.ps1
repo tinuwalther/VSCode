@@ -12,6 +12,7 @@ function prompt
     else{
         $color = 'Green'
     }
+    Set-PSReadLineOption -PredictionViewStyle ListView
     Set-Location ~
     $history = Get-History -ErrorAction Ignore
     $Version = "$($PSVersionTable.PSVersion.Major).$($PSVersionTable.PSVersion.Minor).$($PSVersionTable.PSVersion.Patch)"

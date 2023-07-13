@@ -12,6 +12,7 @@ function prompt
         $color = 'Green'
     }
     Set-Location ~
+    Set-PSReadLineOption -PredictionViewStyle ListView
     $history = Get-History -ErrorAction Ignore
     $Version = "$($PSVersionTable.PSVersion.Major).$($PSVersionTable.PSVersion.Minor).$($PSVersionTable.PSVersion.Patch)"
     Write-Host "[$($history.count[-1])] " -NoNewline
