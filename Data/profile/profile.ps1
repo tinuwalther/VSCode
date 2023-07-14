@@ -11,6 +11,7 @@ function prompt
     else{
         $color = 'Green'
     }
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     Import-Module -Name CompletionPredictor
     Set-Location ~
     Set-PSReadLineOption -PredictionViewStyle ListView
