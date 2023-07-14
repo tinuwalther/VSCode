@@ -12,6 +12,7 @@ function prompt
     else{
         $color = 'Green'
     }
+    Import-Module -Name CompletionPredictor
     Set-PSReadLineOption -PredictionViewStyle ListView
     Set-Location ~
     $history = Get-History -ErrorAction Ignore
