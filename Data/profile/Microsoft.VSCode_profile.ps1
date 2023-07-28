@@ -1,10 +1,14 @@
 function Test-IsAdministrator {
-    $user = [Security.Principal.WindowsIdentity]::GetCurrent();
-    (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
+    [CmdletBinding()]
+    param(
+        $user = [Security.Principal.WindowsIdentity]::GetCurrent()
+    )
+    return (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 }
 
-function prompt
-{
+function prompt {
+    [CmdletBinding()]
+    param()
 
     if (Test-IsAdministrator) {
         $color = 'Red'
@@ -15,11 +19,15 @@ function prompt
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     Import-Module -Name CompletionPredictor
     Set-PSReadLineOption -PredictionViewStyle ListView
-    $vscode = (code --version)[0]
     $history = Get-History -ErrorAction Ignore
     $Version = "$($PSVersionTable.PSVersion.Major).$($PSVersionTable.PSVersion.Minor).$($PSVersionTable.PSVersion.Patch)"
     Write-Host "[$($history.count[-1])] " -NoNewline
-    Write-Host "[$(($env:UserName).ToUpper())@$($env:COMPUTERNAME)] [VSCode $($vscode)] " -ForegroundColor $color -NoNewline
+    if ($Host.Name -eq 'Visual Studio Code Host') {
+        $vscode = (code --version)[0]
+        Write-Host "[$(($env:UserName).ToUpper())@$($env:COMPUTERNAME)] [$($Host.Name) $($vscode)] $CurrentOS " -ForegroundColor $color -NoNewline
+    }else{
+        Write-Host "[$(($env:UserName).ToUpper())@$($env:COMPUTERNAME)] [$($Host.Name)] " -ForegroundColor $color -NoNewline
+    }
     Write-Host ("I ") -nonewline
     Write-Host (([char]9829) ) -ForegroundColor $color -nonewline
     Write-Host (" PS $Version ") -nonewline
