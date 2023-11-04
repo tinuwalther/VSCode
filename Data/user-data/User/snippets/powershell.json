@@ -38,7 +38,6 @@
 			"\t\t$$function = $($$MyInvocation.MyCommand.Name)",
 			"\t\tWrite-Verbose $('[', (Get-Date -f 'yyyy-MM-dd HH:mm:ss.fff'), ']', '[ Begin   ]', $$function -Join ' ')",
 			"\t\t#endregion",
-			"\t\t$$ret = $$null # or @()",
 			"\t}",
 			"",
 			"\tprocess{",
